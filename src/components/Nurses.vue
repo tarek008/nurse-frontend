@@ -10,6 +10,7 @@
       <div class="serach-tri">
         <v-responsive class="mx-auto" max-width="344">
           <v-text-field
+            data-testid="Search"
             v-model="search"
             append-icon="mdi-magnify"
             label="Search"
@@ -24,6 +25,7 @@
             :items="items"
             density="compact"
             label="Filter By"
+            data-testid="Filter_Button"
           ></v-select>
         </v-responsive>
       </div>

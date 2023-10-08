@@ -1,7 +1,8 @@
 .DS_Store
 node_modules
 /dist
-
+/cypress
+.env
 
 # local env files
 .env.local
@@ -21,5 +22,3 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
-
-.env

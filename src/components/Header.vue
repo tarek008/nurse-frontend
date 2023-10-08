@@ -14,7 +14,11 @@
 
       <router-link to="/" class="nav-link"> Home </router-link>
 
-      <router-link :to="{ name: 'nurses' }" class="nav-link">
+      <router-link
+        data-testid="Nurses_Nav_Bar"
+        :to="{ name: 'nurses' }"
+        class="nav-link"
+      >
         Nurses
       </router-link>
     </v-app-bar>
