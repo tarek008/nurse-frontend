@@ -72,6 +72,10 @@ export default {
   watch: {
     selectedFilter(newValue) {
       this.$emit("filter-changed", newValue);
+      this.page = 1;
+    },
+    page(newValue) {
+      this.$emit("page-changed", newValue);
     },
   },
   computed: {

@@ -1,5 +1,10 @@
 <template>
-  <Nurses :nurses="nurses" @filter-changed="handleFilterChange" />
+  <!--<Nurses :nurses="nurses" @filter-changed="handleFilterChange" />-->
+  <Nurses
+    :nurses="nurses"
+    @filter-changed="handleFilterChange"
+    @page-changed="handlePageChange"
+  />
 </template>
 
 <script>
@@ -13,45 +18,49 @@ export default {
   data() {
     return {
       nurses: [],
+      page: 1,
+      limit: 10,
     };
   },
   methods: {
-    fetchNurses() {
-      const res = fetch(process.env.VUE_APP_ALL_NURSES_ENDPOINT);
-      const data = res.then((res) => res.json());
-      return data;
+    async fetchNurses() {
+      return await fetch(process.env.VUE_APP_ALL_NURSES_ENDPOINT).then((res) =>
+        res.json()
+      );
     },
-    fetchNursesByFirstName() {
-      const res = fetch(process.env.VUE_APP_SORT_BY_FIRSTNAME_ENDPOINT);
-      const data = res.then((res) => res.json());
-      return data;
+    handlePageChange(page) {
+      this.page = page;
     },
-    fetchNursesByLastName() {
-      const res = fetch(process.env.VUE_APP_SORT_BY_LASTNAME_ENDPOINT);
-      const data = res.then((res) => res.json());
-      return data;
+    async fetchNursesParPage() {
+      const url = `${process.env.VUE_APP_PAGINATION_ENDPOINT}?page=${this.page}&limit=${this.limit}`;
+      const res = await fetch(url);
+      const data = await res.json();
+      return data.data;
     },
-    fetchNursesByZipCode() {
-      const res = fetch(process.env.VUE_APP_SORT_BY_ZIPCODE_ENDPOINT);
-      const data = res.then((res) => res.json());
-      return data;
+    async fetchNursesByField(sortBy) {
+      const url = `${process.env.VUE_APP_SORT_BY_Field_ENDPOINT}?sortBy=${sortBy}`;
+      return await fetch(url).then((res) => res.json());
     },
     async handleFilterChange(filter) {
+      this.page = 1;
       switch (filter) {
         case "FirstName":
-          this.nurses = await this.fetchNursesByFirstName();
+          this.nurses = await this.fetchNursesByField("firstname");
           break;
         case "LastName":
-          this.nurses = await this.fetchNursesByLastName();
+          this.nurses = await this.fetchNursesByField("lastname");
           break;
         case "ZipCode":
-          this.nurses = await this.fetchNursesByZipCode();
+          this.nurses = await this.fetchNursesByField("zipcode");
           break;
         default:
           this.nurses = await this.fetchNurses();
           break;
       }
     },
+  },
+  watch: {
+    page: "fetchNursesParPage",
   },
   async created() {
     this.nurses = await this.fetchNurses();
