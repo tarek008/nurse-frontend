@@ -1,10 +1,15 @@
 <template>
-  <!--<Nurses :nurses="nurses" @filter-changed="handleFilterChange" />-->
-  <Nurses
-    :nurses="nurses"
-    @filter-changed="handleFilterChange"
-    @page-changed="handlePageChange"
-  />
+  <v-row>
+    <v-col cols="12" lg="2" md="2"> </v-col>
+    <v-col cols="12" lg="8" md="8">
+      <Nurses
+        :nurses="nurses"
+        @filter-changed="handleFilterChange"
+        @page-changed="handlePageChange"
+      />
+    </v-col>
+    <v-col cols="12" lg="2" md="2"> </v-col>
+  </v-row>
 </template>
 
 <script>

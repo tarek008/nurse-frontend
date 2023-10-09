@@ -50,7 +50,6 @@ export default {
 <style scoped>
 h1 {
   text-align: center;
-  white-space: pre;
   color: #424d60;
   padding-top: 100px;
 }

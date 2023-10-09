@@ -1,42 +1,44 @@
 <template>
   <div class="nurses-page">
-    <h1>Nurses Page</h1>
-    <p>
-      Welcome to the Nurses page. Here you can find information about our
-      dedicated nurses.
-    </p>
-
     <div class="table-container">
       <div class="serach-tri">
-        <v-responsive class="mx-auto" max-width="344">
-          <v-text-field
-            data-testid="Search"
-            v-model="search"
-            append-icon="mdi-magnify"
-            label="Search"
-            single-line
-            hide-details
-          ></v-text-field>
-        </v-responsive>
-        <v-responsive class="mx-auto" max-width="344">
-          <!--v-model="selectedFilter" to track the selected filter -->
-          <v-select
-            v-model="selectedFilter"
-            :items="items"
-            density="compact"
-            label="Filter By"
-            data-testid="Filter_Button"
-          ></v-select>
-        </v-responsive>
+        <v-row>
+          <!-- Search Text Field -->
+          <v-col cols="12" lg="6">
+            <v-responsive class="mx-auto" max-width="344">
+              <v-text-field
+                data-testid="Search"
+                v-model="search"
+                append-icon="mdi-magnify"
+                label="Search"
+                single-line
+                hide-details
+              ></v-text-field>
+            </v-responsive>
+          </v-col>
+
+          <!-- Filter Select -->
+          <v-col cols="12" lg="6">
+            <v-responsive class="mx-auto" max-width="344">
+              <v-select
+                v-model="selectedFilter"
+                :items="items"
+                density="compact"
+                label="Filter By"
+                data-testid="Filter_Button"
+              ></v-select>
+            </v-responsive>
+          </v-col>
+        </v-row>
       </div>
 
-      <v-table class="bordered-table">
+      <v-data-table class="bordered-table">
         <thead>
           <tr>
-            <th class="text-left T-header">Firstname</th>
-            <th class="text-left T-header">Lastname</th>
-            <th class="text-left T-header">Zipcode</th>
-            <th class="text-left T-header">Email</th>
+            <th class="text-left custom-th">Firstname</th>
+            <th class="text-left custom-th">Lastname</th>
+            <th class="text-left custom-th">Zipcode</th>
+            <th class="text-left custom-th">Email</th>
           </tr>
         </thead>
         <tbody>
@@ -47,9 +49,17 @@
             <td class="text-left">{{ item.email }}</td>
           </tr>
         </tbody>
-      </v-table>
+        <template #bottom></template>
+      </v-data-table>
 
-      <v-pagination v-model="page" :length="pageCount"></v-pagination>
+      <v-pagination
+        v-model="page"
+        :length="pageCount"
+        color="blue darken-1"
+        circle
+        prev-icon="mdi-chevron-left"
+        next-icon="mdi-chevron-right"
+      ></v-pagination>
     </div>
   </div>
 </template>
@@ -124,23 +134,28 @@ export default {
 }
 
 .table-container {
-  width: 80%;
+  width: 100%;
   margin-top: 20px;
 }
 
-.T-header {
-  background-color: lightblue;
-  font-weight: bold;
-  color: white !important ;
-}
 .bordered-table {
   border: 1px solid black;
   border-collapse: collapse;
+  border-radius: 10px;
 }
 
 .serach-tri {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
+}
+
+.custom-th {
+  background-color: rgb(50, 120, 160) !important; 
+  border-bottom: 2px solid #e0e0e0 !important; 
+  font-weight: 600 !important; 
+  padding: 8px 16px !important; 
+  color: White !important;
+  font-weight: bold !important;
 }
 </style>
