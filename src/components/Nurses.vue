@@ -151,10 +151,10 @@ export default {
 }
 
 .custom-th {
-  background-color: rgb(50, 120, 160) !important; 
-  border-bottom: 2px solid #e0e0e0 !important; 
-  font-weight: 600 !important; 
-  padding: 8px 16px !important; 
+  background-color: rgb(50, 120, 160) !important;
+  border-bottom: 2px solid #e0e0e0 !important;
+  font-weight: 600 !important;
+  padding: 8px 16px !important;
   color: White !important;
   font-weight: bold !important;
 }
