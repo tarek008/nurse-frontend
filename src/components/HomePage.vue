@@ -54,6 +54,6 @@ h1 {
   padding-top: 100px;
 }
 .displayText {
-  color: #ffdae4;
+  color: #62e1ff;
 }
 </style>
