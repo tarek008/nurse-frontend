@@ -20,7 +20,7 @@ npm install
 ```
 3. Lancez le projet:
 ```bash
-npm serve
+npm run serve
 ```
 
 Testing :
